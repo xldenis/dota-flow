@@ -1,17 +1,16 @@
 require 'yaml'
-require './dota.rb'
-require './flow.rb'
+require_relative 'dota'
+require_relative 'flowdock'
 
 Settings = YAML.load_file('keys.yml')
 
-FlowDock.token = Settings[:STEAM_API_KEY]
-Dota.key       = Settings[:FLOW_API_KEY]
+FlowDock.token = Settings['FLOW_API_KEY']
+Dota.key       = Settings['STEAM_API_KEY']
 
 time = ENV['LAST_CHECK'] || Time.now - 3600
 
-
 matches = []
-Settings[:PLAYER_IDS].each do |player_id|
+Settings['PLAYER_IDS'].each do |player_id|
   matches += Dota.matches({ account_id: player_id, date_min: time.to_i}).select {|m| m.start_time >= time }
 end
 puts matches.to_s
