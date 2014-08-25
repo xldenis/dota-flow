@@ -39,14 +39,14 @@ module Dota
   end
 
   class Match
-    attr_reader :start_time, :players, :match_id, :lobby_type
+    attr_reader :start_time, :players, :id, :lobby_type
 
     LOBBY_TYPES = { -1 => :invalid, 0 => :public_matchmaking, 1 => :practice, 2 => :tournament, 3 => :tutorial, 4 => :co_op_bots, 5 => :team_match, 6 => :solo}
 
     def initialize(match)
       @start_time = Time.at(match['start_time'])
       @players    = match['players'].map {|p| Player.new(p)}
-      @match_id   = match['match_id']
+      @id   = match['match_id']
       @lobby_type = match['lobby_type']
       @details    = nil
     end
