@@ -16,7 +16,7 @@ namespace :dota do
     KEYS['PLAYER_IDS'].each do |player_id|
       matches += Dota.matches({ account_id: player_id, date_min: time.to_i}).select {|m| m.start_time >= time }
     end
-    matches.flatten.each do |match|
+    matches.flatten.uniq(&:id).each do |match|
       players = match.players.select {|p| KEYS['PLAYER_IDS'].include? p.account_id.to_s }
       msg = {
         source: "Shopify Dota 2 Digest",
