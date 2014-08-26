@@ -7,7 +7,7 @@ KEYS = Settings.new('keys.yml')
 FlowDock.token = KEYS['FLOW_API_KEY']
 Dota.key       = KEYS['STEAM_API_KEY']
 
-time = ENV['LAST_CHECK'] || Time.now - 3600 * 36
+time = ENV['LAST_CHECK'] || Time.now - 3600
 
 namespace :dota do
   desc "Push recent dota matches to flowdock"

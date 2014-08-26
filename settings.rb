@@ -1,6 +1,10 @@
 class Settings
   def initialize(file)
-    @settings = YAML.load_file(file)
+    begin
+      @settings = YAML.load_file(file)
+    rescue
+      @settings = {}
+    end
   end
 
   def [](key)

@@ -6,3 +6,4 @@ gem 'rake'
 
 gem 'httparty'
 
+gem 'kramdown'
