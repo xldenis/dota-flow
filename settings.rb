@@ -1,3 +1,4 @@
+require 'yaml'
 class Settings
   def initialize(file)
     begin
@@ -8,6 +9,6 @@ class Settings
   end
 
   def [](key)
-    @settings[key] || ENV[key]
+    @settings[key] || YAML.load(ENV[key])
   end
 end
