@@ -48,7 +48,6 @@ module Dota
       @players    = match['players'].map {|p| Player.new(p)}
       @id   = match['match_id']
       @lobby_type = match['lobby_type']
-      @details    = nil
     end
 
     def details
@@ -72,7 +71,7 @@ module Dota
     end 
 
     class Player
-      attr_reader :account_id, :hero_id
+      attr_reader :account_id, :hero_id, :player_slot
 
       def initialize(player)
         @account_id  = player['account_id']
@@ -81,7 +80,7 @@ module Dota
       end
 
       def team
-        (@player_slot & 0x80) ? :dire : :radiant
+        (@player_slot & 0x80) != 0 ? :dire : :radiant
       end
 
       def position
